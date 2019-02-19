@@ -1,6 +1,6 @@
 {
   "name": "ghetto-monad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Monad-like patterns using TypeScript type guards",
   "main": "index.js",
   "scripts": {
