@@ -1,0 +1,19 @@
+{
+  "name": "ghetto-monad",
+  "version": "1.0.0",
+  "description": "Monad-like patterns using TypeScript type guards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwulf/ghetto-monad.git"
+  },
+  "author": "Josh Wulf <josh@magikcraft.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwulf/ghetto-monad/issues"
+  },
+  "homepage": "https://github.com/jwulf/ghetto-monad#readme"
+}
