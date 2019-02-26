@@ -1,19 +1,26 @@
 {
-  "name": "ghetto-monad",
-  "version": "1.0.1",
-  "description": "Monad-like patterns using TypeScript type guards",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jwulf/ghetto-monad.git"
-  },
-  "author": "Josh Wulf <josh@magikcraft.io>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jwulf/ghetto-monad/issues"
-  },
-  "homepage": "https://github.com/jwulf/ghetto-monad#readme"
+    "name": "ghetto-monad",
+    "version": "2.0.0",
+    "description": "Either and Maybe monad-like patterns using TypeScript type guards",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jwulf/ghetto-monad.git"
+    },
+    "author": "Josh Wulf <josh@magikcraft.io>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jwulf/ghetto-monad/issues"
+    },
+    "homepage": "https://github.com/jwulf/ghetto-monad#readme",
+    "dependencies": {
+        "@types/jest": "^24.0.8",
+        "jest": "^24.1.0",
+        "ts-jest": "^24.0.0",
+        "ts-node": "^8.0.2",
+        "typescript": "^3.3.3333"
+    }
 }
