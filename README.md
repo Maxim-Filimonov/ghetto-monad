@@ -4,6 +4,14 @@ Monad-inspired patterns using TypeScript type guards to enforce null-safety and 
 
 _Version 2_: Version 2 of the library is backward-compatible with Version 1, but provides first-class objects.
 
+## Installing
+
+Install from [npm](https://www.npmjs.com/package/ghetto-monad):
+
+```
+npm i ghetto-monad
+```
+
 ## Either
 
 The Either type uses type guards to enforce error handling before allowing access to a return value. Use it when a function may return _either_ an Error or a result.
@@ -13,9 +21,9 @@ import {Either, ErrorResult, Result} from 'ghetto-monad';
 
 function errorOrString(jsonString: string): Either<ErrorResult, Result<object>> {
     try {
-        return new Result(JSON.Parse(jsonString));
+        return new Result(JSON.parse(jsonString));
     } catch (e) {
-        return newErrorResult(e);
+        return new ErrorResult(e);
     }
 }
 
