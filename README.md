@@ -38,9 +38,13 @@ if (result.isError) {
 
 ## Typed Errors with `ErrorResult<T>`
 
-Sometimes a function can return an Error. The `ErrorResult` type wraps an Error, and provides metadata on the type of error, allowing you to communicate to consuming code the types of error that can be returned.
+Sometimes a function can return an Error. The `ErrorResult` type can wrap an Error, and provides metadata on the type of error, allowing you to communicate to consuming code the types of error that can be returned.
 
 This is similar to the Java construct `throws` (see: [Specifying the Exceptions Thrown by a Method](https://docs.oracle.com/javase/tutorial/essential/exceptions/declaring.html)).
+
+You don't have to use it, in which case just use `ErrorResult<Error>` everywhere.
+
+If you do want error typings, then you need to create wrappers for errors.
 
 For example, if your code can return a `NotImplementedError` or a `ValidationError`, then you declare classes for each of these Error types, extending Error. Then you can specify part of your return as `ErrorResult<NotImplementedError | ValidationError>`.
 
