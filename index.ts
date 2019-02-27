@@ -16,10 +16,10 @@ interface INothing {
     isNothing: true;
     isError: false;
 }
+
 export class Nothing implements INothing {
     public isNothing: true = true;
     public isError: false = false;
-
 }
 
 export class Result<T> implements IResult<T> {
@@ -32,12 +32,12 @@ export class Result<T> implements IResult<T> {
     }
 }
 
-export class ErrorResult implements IError {
+export class ErrorResult<T extends Error> implements IError {
     public isError: true = true;
     public isNothing: false = false;
-    public error: Error;
+    public error: T;
 
-    constructor(error: Error) {
+    constructor(error: T) {
         this.error = error;
     }
 }
