@@ -19,7 +19,7 @@ The Either type uses type guards to enforce error handling before allowing acces
 ```typescript
 import {Either, ErrorResult, Result} from 'ghetto-monad';
 
-function errorOrString(jsonString: string): Either<ErrorResult, Result<object>> {
+function errorOrString(jsonString: string): Either<ErrorResult<Error>, Result<object>> {
     try {
         return new Result(JSON.parse(jsonString));
     } catch (e) {
@@ -33,6 +33,69 @@ if (result.isError) {
     console.log(result.error); // .error property available
 } else {
     console.log(result.value); // .value property available
+}
+```
+
+## Typed Errors with `ErrorResult<T>`
+
+Sometimes a function can return an Error. The `ErrorResult` type wraps an Error, and provides metadata on the type of error, allowing you to communicate to consuming code the types of error that can be returned.
+
+This is similar to the Java construct `throws` (see: [Specifying the Exceptions Thrown by a Method](https://docs.oracle.com/javase/tutorial/essential/exceptions/declaring.html)).
+
+For example, if your code can return a `NotImplementedError` or a `ValidationError`, then you declare classes for each of these Error types, extending Error. Then you can specify part of your return as `ErrorResult<NotImplementedError | ValidationError>`.
+
+You need to implement your typed errors so that you can test them in consuming code using `instanceof`. So:
+
+```typescript
+export class NotImplementedError implements Error {
+	name: string; message: string;
+	stack?: string | undefined;
+	constructor(error: Error) {
+		this.name = error.name;
+		this.message = error.message;
+		this.stack = error.stack;
+	}
+};
+
+export class ValidationError implements Error {
+	name: string; message: string;
+	stack?: string | undefined;
+	constructor(error: Error) {
+		this.name = error.name;
+		this.message = error.message;
+		this.stack = error.stack;
+	}
+};
+```
+
+And return errors like this:
+
+```typescript
+const coinToss = () => Math.random() > 0.5 ? "heads" : "tails";
+
+function errorOrResult(): Either<ErrorResult<NotImplementedError | ValidationError>, Result<number>> {
+    if (coinToss() === "heads") {
+        return new Result(Math.random());
+    }
+    if (coinToss() === "heads") {
+        return new ErrorResult(new NotImplementedError(new Error("Not implemented (yet)!")))
+    }
+    return new ErrorResult(new ValidationError(new Error("Validation Error")));
+}
+```
+
+Then in the consuming code you can test the `ErrorResult` like this:
+
+```typescript
+const result = errorOrResult();
+if (result.isError) {
+    if (result.error instanceof NotImplementedError) {
+        // NotImplementedError
+    } else {
+        // ValidationError
+    }
+} else {
+    console.log(result.value);
 }
 ```
 
@@ -63,7 +126,7 @@ if (result.isNothing) {
 ```typescript
 import {Either, ErrorResult, Maybe, Nothing, Result} from 'ghetto-monad';
 
-function eitherOrNothing(): Either<IError, Maybe<IResult<string>>> {
+function eitherOrNothing(): Either<ErrorResult<Error>, Maybe<IResult<string>>> {
     if (Math.random() > 0.5) {
         return new ErrorResult(new Error());
     } else return new Result<string>("Success!");

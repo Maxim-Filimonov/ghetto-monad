@@ -23,11 +23,11 @@ export declare class Result<T> implements IResult<T> {
     value: T;
     constructor(value: T);
 }
-export declare class ErrorResult implements IError {
+export declare class ErrorResult<T extends Error> implements IError {
     isError: true;
     isNothing: false;
-    error: Error;
-    constructor(error: Error);
+    error: T;
+    constructor(error: T);
 }
 export declare type Maybe<T> = INothing | T;
 export {};
