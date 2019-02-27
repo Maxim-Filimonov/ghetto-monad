@@ -1,6 +1,6 @@
 {
     "name": "ghetto-monad",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "Either and Maybe monad-like patterns using TypeScript type guards",
     "main": "index.js",
     "scripts": {
