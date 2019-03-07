@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Nothing {
-    constructor() {
+    constructor(error) {
         this.isNothing = true;
         this.isError = false;
+        this.error = error || new Error('Nothing!');
     }
 }
 exports.Nothing = Nothing;
