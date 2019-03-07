@@ -15,11 +15,16 @@ interface IResult<T> {
 interface INothing {
     isNothing: true;
     isError: false;
+    error: Error;
 }
 
 export class Nothing implements INothing {
     public isNothing: true = true;
     public isError: false = false;
+    public error: Error;
+    constructor(error?: Error) {
+        this.error = error || new Error('Nothing!');
+    }
 }
 
 export class Result<T> implements IResult<T> {

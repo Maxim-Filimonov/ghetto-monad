@@ -12,10 +12,13 @@ interface IResult<T> {
 interface INothing {
     isNothing: true;
     isError: false;
+    error: Error;
 }
 export declare class Nothing implements INothing {
     isNothing: true;
     isError: false;
+    error: Error;
+    constructor(error?: Error);
 }
 export declare class Result<T> implements IResult<T> {
     isNothing: false;
